@@ -22,3 +22,18 @@ inline fun <T> decodeBiser(bytes: ByteArray, block: BiserReader.() -> T): T {
 inline fun <T> decodeBiser(bytes: ByteArray?, block: BiserReader.() -> T): T? {
 	return if (bytes == null) null else decodeBiser(bytes, block)
 }
+
+fun BiserReader.readIntList(): List<Int> {
+	return readList(Decoders.INT)
+}
+
+fun BiserReader.readLongList(): List<Long> {
+	return readList(Decoders.LONG)
+}
+
+fun BiserWriter.writeIntList(list: Collection<Int>) {
+	return writeList(list, Encoders.INT)
+}
+fun BiserWriter.writeLongList(list: Collection<Long>) {
+	return writeList(list, Encoders.LONG)
+}
