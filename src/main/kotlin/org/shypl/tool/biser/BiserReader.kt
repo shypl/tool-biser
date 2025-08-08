@@ -42,6 +42,8 @@ interface BiserReader {
 	
 	fun <E> readList(target: MutableCollection<E>, decoder: Decoder<E>): Int
 	
+	fun <E> readList(target: Array<E>, decoder: Decoder<E>): Int
+	
 	fun <K, V> readMap(keyDecoder: Decoder<K>, valueDecoder: Decoder<V>): Map<K, V>
 	
 	fun <K, V> readMap(target: MutableMap<K, V>, keyDecoder: Decoder<K>, valueDecoder: Decoder<V>): Int
