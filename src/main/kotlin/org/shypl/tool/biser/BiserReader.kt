@@ -1,5 +1,8 @@
 package org.shypl.tool.biser
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+
 interface BiserReader {
 	fun readBoolean(): Boolean
 	
@@ -37,6 +40,15 @@ interface BiserReader {
 	fun readString(): String
 	
 	fun readStringNullable(): String?
+	
+	fun readDate(): LocalDate
+	
+	fun readDateNullable(): LocalDate?
+	
+	fun readDateTime(): LocalDateTime
+	
+	fun readDateTimeNullable(): LocalDateTime?
+	
 	
 	fun <E> readList(decoder: Decoder<E>): List<E>
 	

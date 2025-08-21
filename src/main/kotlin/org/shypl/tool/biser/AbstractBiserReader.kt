@@ -11,6 +11,8 @@ import org.shypl.tool.utils.collections.ByteArrayList
 import org.shypl.tool.utils.collections.DoubleArrayList
 import org.shypl.tool.utils.collections.IntArrayList
 import org.shypl.tool.utils.collections.LongArrayList
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 abstract class AbstractBiserReader : BiserReader {
 	protected val memory = ByteArray(8)
@@ -423,5 +425,21 @@ abstract class AbstractBiserReader : BiserReader {
 			.or(memory[5].toLong() and 0xFF shl 16)
 			.or(memory[6].toLong() and 0xFF shl 8)
 			.or(memory[7].toLong() and 0xFF)
+	}
+	
+	override fun readDate(): LocalDate {
+		return LocalDate.of(readInt(), readInt(), readInt())
+	}
+	
+	override fun readDateNullable(): LocalDate? {
+		return if (readBoolean()) readDate() else null
+	}
+	
+	override fun readDateTime(): LocalDateTime {
+		return LocalDateTime.of(readInt(), readInt(), readInt(), readInt(), readInt(), readInt(), readInt())
+	}
+	
+	override fun readDateTimeNullable(): LocalDateTime? {
+		return if (readBoolean()) readDateTime() else null
 	}
 }

@@ -1,5 +1,8 @@
 package org.shypl.tool.biser
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+
 interface BiserWriter {
 	fun writeBoolean(value: Boolean)
 	
@@ -26,6 +29,15 @@ interface BiserWriter {
 	fun writeString(value: String)
 	
 	fun writeStringNullable(value: String?)
+	
+	fun writeDate(value: LocalDate)
+	
+	fun writeDateNullable(value: LocalDate?)
+	
+	fun writeDateTime(value: LocalDateTime)
+	
+	fun writeDateTimeNullable(value: LocalDateTime?)
+	
 	
 	fun <E> writeList(value: Collection<E>, encoder: Encoder<E>)
 	

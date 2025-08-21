@@ -1,5 +1,8 @@
 package org.shypl.tool.biser
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+
 typealias Decoder<T> = BiserReader.() -> T
 
 object Decoders {
@@ -17,6 +20,12 @@ object Decoders {
 	
 	val STRING: Decoder<String> = BiserReader::readString
 	val STRING_NULLABLE: Decoder<String?> = BiserReader::readStringNullable
+	
+	val DATE: Decoder<LocalDate> = BiserReader::readDate
+	val DATE_NULLABLE: Decoder<LocalDate?> = BiserReader::readDateNullable
+	
+	val DATE_TIME: Decoder<LocalDateTime> = BiserReader::readDateTime
+	val DATE_TIME_NULLABLE: Decoder<LocalDateTime?> = BiserReader::readDateTimeNullable
 	
 	fun <E> forList(decoder: Decoder<E>): Decoder<List<E>> = { readList(decoder) }
 	
