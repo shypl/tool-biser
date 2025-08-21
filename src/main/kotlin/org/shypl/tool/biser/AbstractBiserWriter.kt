@@ -1,7 +1,6 @@
 package org.shypl.tool.biser
 
-import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 abstract class AbstractBiserWriter : BiserWriter {
 	private val memory = ByteArray(9)
@@ -270,31 +269,11 @@ abstract class AbstractBiserWriter : BiserWriter {
 	
 	protected abstract fun writeByteArrayRaw(array: ByteArray, offset: Int, size: Int)
 	
-	override fun writeDate(value: LocalDate) {
-		writeInt(value.year)
-		writeInt(value.monthValue)
-		writeInt(value.dayOfMonth)
+	override fun writeDateTime(value: ZonedDateTime) {
+		writeLong(value.toEpochSecond())
 	}
 	
-	override fun writeDateNullable(value: LocalDate?) {
-		if (value == null) {
-			writeBoolean(false)
-		}
-		else {
-			writeBoolean(true)
-			writeDate(value)
-		}
-	}
-	
-	override fun writeDateTime(value: LocalDateTime) {
-		writeDate(value.toLocalDate())
-		writeInt(value.hour)
-		writeInt(value.minute)
-		writeInt(value.second)
-		writeInt(value.nano)
-	}
-	
-	override fun writeDateTimeNullable(value: LocalDateTime?) {
+	override fun writeDateTimeNullable(value: ZonedDateTime?) {
 		if (value == null) {
 			writeBoolean(false)
 		}

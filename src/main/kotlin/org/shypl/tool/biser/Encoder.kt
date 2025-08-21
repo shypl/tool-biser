@@ -1,7 +1,6 @@
 package org.shypl.tool.biser
 
-import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 typealias Encoder<T> = BiserWriter.(T) -> Unit
 
@@ -21,11 +20,8 @@ object Encoders {
 	val STRING: Encoder<String> = BiserWriter::writeString
 	val STRING_NULLABLE: Encoder<String?> = BiserWriter::writeStringNullable
 	
-	val DATE: Encoder<LocalDate> = BiserWriter::writeDate
-	val DATE_NULLABLE: Encoder<LocalDate?> = BiserWriter::writeDateNullable
-	
-	val DATE_TIME: Encoder<LocalDateTime> = BiserWriter::writeDateTime
-	val DATE_TIME_NULLABLE: Encoder<LocalDateTime?> = BiserWriter::writeDateTimeNullable
+	val DATE_TIME: Encoder<ZonedDateTime> = BiserWriter::writeDateTime
+	val DATE_TIME_NULLABLE: Encoder<ZonedDateTime?> = BiserWriter::writeDateTimeNullable
 	
 	fun <E> forList(encoder: Encoder<E>): Encoder<List<E>> = { writeList(it, encoder) }
 	
